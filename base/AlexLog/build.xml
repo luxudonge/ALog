@@ -6,17 +6,20 @@
 
 	<!--引入build.properties中的常用属性-->
 	<property file="build.properties" />
-
-	<target name="prepare" description="准备工作">
+	
+	<target name="cleandir" description="清除目录">
+		<echo>开始清除目录...</echo>
+		<delete dir="${build.dir}" />
+	</target>
+	
+	<target name="prepare" description="准备工作" depends="cleandir">
+		<echo>开始准备工作...</echo>
 		<mkdir dir="${build.dir}" />
 		<mkdir dir="${build.dir.classes}" />
 	</target>
 
-	<target name="cleandir" description="清除目录">
-		<delete dir="${build.dir}" />
-	</target>
-
 	<target name="compile" description="编译源文件" depends="prepare">
+		<echo>编译源文件...</echo>
 		<!-- debug="off"表示关闭断点调试 -->
 		<javac srcdir="${src.dir}" destdir="${build.dir.classes}" debug="off">
 			<compilerarg line="-encoding UTF-8 " />
@@ -26,18 +29,21 @@
 	</target>
 
 	<target name="package" description="包装成jar文件" depends="compile">
+		<echo>包装成jar文件...</echo>
 		<mkdir dir="${build.dir.bin}" />
 		<jar basedir="${build.dir.classes}" jarfile="${build.dir.bin.in}">
 		</jar>
 	</target>
 
 	<target name="obfuscate" description="使用混淆器" depends="package">
+		<echo>开始混淆...</echo>
 		<taskdef resource="proguard/ant/task.properties" classpath="${proguard.dir}/proguard.jar" />
 		<proguard configuration="${proguard.dir}/library.pro" />
 	</target>
 
-	<target name="all" description="完成所有目标" depends="cleandir,obfuscate">
+	<target name="all" description="完成所有目标" depends="obfuscate">
+		<echo>完成编译 </echo>
 	</target>
 
-
+	
 </project>
