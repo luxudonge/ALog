@@ -1,0 +1,43 @@
+﻿<project name="myapp" default="all" basedir=".">
+
+	<path id="external.classpath">
+		<pathelement location="D:\android-sdk-windows\platforms\android-9\android.jar" />
+	</path>
+
+	<!--引入build.properties中的常用属性-->
+	<property file="build.properties" />
+
+	<target name="prepare" description="准备工作">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir.classes}" />
+	</target>
+
+	<target name="cleandir" description="清除目录">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile" description="编译源文件" depends="prepare">
+		<!-- debug="off"表示关闭断点调试 -->
+		<javac srcdir="${src.dir}" destdir="${build.dir.classes}" debug="off">
+			<compilerarg line="-encoding UTF-8 " />
+			<classpath refid="external.classpath" />
+		</javac>
+		<!--<javac debug="off" srcdir="${src.dir}" destdir="${build.dir.classes}" classpathref="CMR.classpath" />-->
+	</target>
+
+	<target name="package" description="包装成jar文件" depends="compile">
+		<mkdir dir="${build.dir.bin}" />
+		<jar basedir="${build.dir.classes}" jarfile="${build.dir.bin.in}">
+		</jar>
+	</target>
+
+	<target name="obfuscate" description="使用混淆器" depends="package">
+		<taskdef resource="proguard/ant/task.properties" classpath="${proguard.dir}/proguard.jar" />
+		<proguard configuration="${proguard.dir}/library.pro" />
+	</target>
+
+	<target name="all" description="完成所有目标" depends="cleandir,obfuscate">
+	</target>
+
+
+</project>

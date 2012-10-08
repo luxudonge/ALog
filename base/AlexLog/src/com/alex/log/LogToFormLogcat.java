@@ -12,7 +12,7 @@ import android.util.Log;
 
 /**
  * 
- * ´ÓlogcatÀï»ñÈ¡Êı¾İ
+ * ä»logcaté‡Œè·å–æ•°æ®
  * 
  * @author Alex.Lu
  *
@@ -77,7 +77,7 @@ class LogToFormLogcat {
 	
 	
 	/**
-	 * »ñÈ¡ÈÕÖ¾ÁÙÊ±ÎÄ¼şÊäÈëÁ÷
+	 * è·å–æ—¥å¿—ä¸´æ—¶æ–‡ä»¶è¾“å…¥æµ
 	 * 
 	 * @return
 	 */
@@ -102,7 +102,7 @@ class LogToFormLogcat {
 	}
 	
 	/**
-	 * ¹Ø±ÕÈÕÖ¾Êä³öÁ÷
+	 * å…³é—­æ—¥å¿—è¾“å‡ºæµ
 	 */
 	private void closeLogFileOutStream() {
 		try {

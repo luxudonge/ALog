@@ -3,7 +3,7 @@ package com.alex.log;
 import android.util.Log;
 
 /**
- * 输出到控制台
+ * 杈撳嚭鍒版帶鍒跺彴
  * 
  * @author Alex.Lu
  *
