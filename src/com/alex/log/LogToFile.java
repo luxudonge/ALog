@@ -7,7 +7,7 @@ import java.io.OutputStream;
 
 /**
  * 
- * Êä³öµ½ÎÄ¼ş
+ * è¾“å‡ºåˆ°æ–‡ä»¶
  * 
  * @author Alex.Lu
  *
@@ -57,7 +57,7 @@ class LogToFile {
 	
 	
 	/**
-	 * »ñÈ¡ÈÕÖ¾ÁÙÊ±ÎÄ¼şÊäÈëÁ÷
+	 * è·å–æ—¥å¿—ä¸´æ—¶æ–‡ä»¶è¾“å…¥æµ
 	 * 
 	 * @return
 	 */
@@ -82,7 +82,7 @@ class LogToFile {
 	}
 	
 	/**
-	 * ¹Ø±ÕÈÕÖ¾Êä³öÁ÷
+	 * å…³é—­æ—¥å¿—è¾“å‡ºæµ
 	 */
 	private void closeLogFileOutStream() {
 		try {

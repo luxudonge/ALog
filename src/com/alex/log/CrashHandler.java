@@ -28,29 +28,29 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	/** Debug Log tag */
 	public static final String TAG = "CrashHandler";
 	/**
-	 * ÊÇ·ñ¿ªÆôÈÕ¼ÇÊä³ö£¬ÔÚDebug×´¿öÏÂ¿ªÆô£¬ ÔÚRelease×´¿öÏÂ·â±ÕÒÔÌáÊ¾·¨¶È»úÄÜ
+	 * æ˜¯å¦å¼€å¯æ—¥è®°è¾“å‡ºï¼Œåœ¨DebugçŠ¶å†µä¸‹å¼€å¯ï¼Œ åœ¨ReleaseçŠ¶å†µä¸‹å°é—­ä»¥æç¤ºæ³•åº¦æœºèƒ½
 	 * */
 	public static final boolean DEBUG = true;
-	/** ÌåÏµÄ¬ÈÏµÄUncaughtException´¦Àí³Í·£Àà */
+	/** ä½“ç³»é»˜è®¤çš„UncaughtExceptionå¤„ç†æƒ©ç½šç±» */
 	private Thread.UncaughtExceptionHandler mDefaultHandler;
-	/** CrashHandlerÊµÀı */
+	/** CrashHandlerå®ä¾‹ */
 	private static CrashHandler INSTANCE;
-	/** ·¨¶ÈµÄContext¶ÔÏó */
+	/** æ³•åº¦çš„Contextå¯¹è±¡ */
 	private Context mContext;
-	/** Ó¦ÓÃPropertiesÀ´±£´æÉè±¸µÄĞÅÏ¢ºÍ´íÎó¿ÍÕ»ĞÅÏ¢ */
+	/** åº”ç”¨Propertiesæ¥ä¿å­˜è®¾å¤‡çš„ä¿¡æ¯å’Œé”™è¯¯å®¢æ ˆä¿¡æ¯ */
 	private Properties mDeviceCrashInfo = new Properties();
 	private static final String VERSION_NAME = "versionName";
 	private static final String VERSION_CODE = "versionCode";
 	private static final String STACK_TRACE = "STACK_TRACE";
-	/** ´íÎó³Ê±¨ÎÄ¼şµÄÀ©´óÃû */
+	/** é”™è¯¯å‘ˆæŠ¥æ–‡ä»¶çš„æ‰©å¤§å */
 	private static final String CRASH_REPORTER_EXTENSION = ".cr";
 	private String DIR;
 	
-	/** °ü¹ÜÖ»ÓĞÒ»¸öCrashHandlerÊµÀı */
+	/** åŒ…ç®¡åªæœ‰ä¸€ä¸ªCrashHandlerå®ä¾‹ */
 	private CrashHandler() {
 	}
 
-	/** »ñÈ¡CrashHandlerÊµÀı £¬µ¥ÀıÄ£Ê½ */
+	/** è·å–CrashHandlerå®ä¾‹ ï¼Œå•ä¾‹æ¨¡å¼ */
 	public static CrashHandler getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new CrashHandler();
@@ -59,8 +59,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
 
 	/**
-	 * ³õÊ¼»¯£¬×¢²áContext¶ÔÏó£¬ »ñÈ¡ÌåÏµÄ¬ÈÏµÄUncaughtException´¦Àí³Í·£Æ÷£¬
-	 * ÉèÖÃ¸ÃCrashHandlerÎª·¨¶ÈµÄÄ¬ÈÏ´¦Àí³Í·£Æ÷ £Àparam ctx
+	 * åˆå§‹åŒ–ï¼Œæ³¨å†ŒContextå¯¹è±¡ï¼Œ è·å–ä½“ç³»é»˜è®¤çš„UncaughtExceptionå¤„ç†æƒ©ç½šå™¨ï¼Œ
+	 * è®¾ç½®è¯¥CrashHandlerä¸ºæ³•åº¦çš„é»˜è®¤å¤„ç†æƒ©ç½šå™¨ ï¼ param ctx
 	 */
 	public void init(Context ctx) {
 		mContext = ctx;
@@ -70,16 +70,16 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
 
 	/**
-	 * µ±UncaughtException²úÉúÊ±»á×ªÈë¸Ãº¯ÊıÀ´´¦Àí³Í·£
+	 * å½“UncaughtExceptionäº§ç”Ÿæ—¶ä¼šè½¬å…¥è¯¥å‡½æ•°æ¥å¤„ç†æƒ©ç½š
 	 */
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
 		
 		if (!handleException(ex) && mDefaultHandler != null) {
-			// ÈôÊÇÓÃ»§Ã»ÓĞ´¦Àí³Í·£ÔòÈÃÌåÏµÄ¬ÈÏµÄÒì³£´¦Àí³Í·£Æ÷À´´¦Àí³Í·£
+			// è‹¥æ˜¯ç”¨æˆ·æ²¡æœ‰å¤„ç†æƒ©ç½šåˆ™è®©ä½“ç³»é»˜è®¤çš„å¼‚å¸¸å¤„ç†æƒ©ç½šå™¨æ¥å¤„ç†æƒ©ç½š
 			mDefaultHandler.uncaughtException(thread, ex);
 		} else {
-			// SleepÒ»»áºóÍ£Ö¹·¨¶È
+			// Sleepä¸€ä¼šååœæ­¢æ³•åº¦
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -91,8 +91,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
 
 	/**
-	 * ×Ô¶¨Òå´íÎó´¦Àí³Í·££¬ÊÕ¼¯´íÎóĞÅÏ¢ ·¢ËÍ´íÎó³Ê±¨µÈ²Ù×İ¾ùÔÚ´ËÍê³É. ¿ª±ÙÕß¿ÉÒÔ°´ÕÕ±¾ÉíµÄ¾°ÏóÀ´×Ô¶¨ÒåÒì³£´¦Àí³Í·£Âß¼­ £Àparam ex
-	 * £Àreturn true:ÈôÊÇ´¦Àí³Í·£ÁË¸ÃÒì³£ĞÅÏ¢;²»È»·µ»Øfalse
+	 * è‡ªå®šä¹‰é”™è¯¯å¤„ç†æƒ©ç½šï¼Œæ”¶é›†é”™è¯¯ä¿¡æ¯ å‘é€é”™è¯¯å‘ˆæŠ¥ç­‰æ“çºµå‡åœ¨æ­¤å®Œæˆ. å¼€è¾Ÿè€…å¯ä»¥æŒ‰ç…§æœ¬èº«çš„æ™¯è±¡æ¥è‡ªå®šä¹‰å¼‚å¸¸å¤„ç†æƒ©ç½šé€»è¾‘ ï¼ param ex
+	 * ï¼ return true:è‹¥æ˜¯å¤„ç†æƒ©ç½šäº†è¯¥å¼‚å¸¸ä¿¡æ¯;ä¸ç„¶è¿”å›false
 	 */
 	private boolean handleException(Throwable ex) {
 
@@ -106,38 +106,38 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		if (msg == null) {
 			return false;
 		}
-		// Ó¦ÓÃToastÀ´ÏÔÊ¾Òì³£ĞÅÏ¢
+		// åº”ç”¨Toastæ¥æ˜¾ç¤ºå¼‚å¸¸ä¿¡æ¯
 		new Thread() {
 			@Override
 			public void run() {
 				
 				Looper.prepare();
-				Toast toast = Toast.makeText(mContext, "·¨¶ÈÊ§×ã,¼´½«ÍË³ö:\r\n" + msg,
+				Toast toast = Toast.makeText(mContext, "æ³•åº¦å¤±è¶³,å³å°†é€€å‡º:\r\n" + msg,
 						Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
-				// MsgPrompt.showMsg(mContext, "·¨¶ÈÊ§×ãÀ²", msg+"\nµãÈ·ÈÏÍË³ö");
+				// MsgPrompt.showMsg(mContext, "æ³•åº¦å¤±è¶³å•¦", msg+"\nç‚¹ç¡®è®¤é€€å‡º");
 				Looper.loop();
 			}
 		}.start();
-		// ÊÕ¼¯Éè±¸ĞÅÏ¢
+		// æ”¶é›†è®¾å¤‡ä¿¡æ¯
 		collectCrashDeviceInfo(mContext);
-		// ±£´æ´íÎó³Ê±¨ÎÄ¼ş
+		// ä¿å­˜é”™è¯¯å‘ˆæŠ¥æ–‡ä»¶
 		saveCrashInfoToFile(ex);
-		/*// ·¢ËÍ´íÎó³Ê±¨µ½°ìÊÂÆ÷
+		/*// å‘é€é”™è¯¯å‘ˆæŠ¥åˆ°åŠäº‹å™¨
 		sendCrashReportsToServer(mContext);*/
 		return true;
 	}
 
 	/**
-	 * ÔÚ·¨¶ÈÆô¶¯Ê±³½, ¿ÉÒÔµ÷ÓÃ¸Ãº¯ÊıÀ´·¢ËÍÒÔÇ°Ã»ÓĞ·¢ËÍµÄ³Ê±¨
+	 * åœ¨æ³•åº¦å¯åŠ¨æ—¶è¾°, å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°æ¥å‘é€ä»¥å‰æ²¡æœ‰å‘é€çš„å‘ˆæŠ¥
 	 */
 	public void sendPreviousReportsToServer() {
 		sendCrashReportsToServer(mContext);
 	}
 
 	/**
-	 * °Ñ´íÎó³Ê±¨·¢ËÍ¸ø°ìÊÂÆ÷,°üº¬ĞÂ²úÉúµÄºÍÒÔÇ°Ã»·¢ËÍµÄ. £Àparam ctx
+	 * æŠŠé”™è¯¯å‘ˆæŠ¥å‘é€ç»™åŠäº‹å™¨,åŒ…å«æ–°äº§ç”Ÿçš„å’Œä»¥å‰æ²¡å‘é€çš„. ï¼ param ctx
 	 */
 	private void sendCrashReportsToServer(Context ctx) {
 		String[] crFiles = getCrashReportFiles(ctx);
@@ -147,17 +147,17 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			for (String fileName : sortedFiles) {
 				File cr = new File(ctx.getFilesDir(), fileName);
 				postReport(cr);
-				cr.delete();// É¾³ıÒÑ·¢ËÍµÄ³Ê±¨
+				cr.delete();// åˆ é™¤å·²å‘é€çš„å‘ˆæŠ¥
 			}
 		}
 	}
 
 	private void postReport(File file) {
-		// TODO ·¢ËÍ´íÎó³Ê±¨µ½°ìÊÂÆ÷
+		// TODO å‘é€é”™è¯¯å‘ˆæŠ¥åˆ°åŠäº‹å™¨
 	}
 
 	/**
-	 * »ñÈ¡´íÎó³Ê±¨ÎÄ¼şÃû £Àparam ctx £Àreturn
+	 * è·å–é”™è¯¯å‘ˆæŠ¥æ–‡ä»¶å ï¼ param ctx ï¼ return
 	 */
 	private String[] getCrashReportFiles(Context ctx) {
 		File filesDir = ctx.getFilesDir();
@@ -170,7 +170,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
 
 	/**
-	 * ±£´æ´íÎóĞÅÏ¢µ½ÎÄ¼şÖĞ £Àparam ex £Àreturn
+	 * ä¿å­˜é”™è¯¯ä¿¡æ¯åˆ°æ–‡ä»¶ä¸­ ï¼ param ex ï¼ return
 	 */
 	private String saveCrashInfoToFile(Throwable ex) {
 		Writer info = new StringWriter();
@@ -188,7 +188,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		try {
 			// long timestamp = System.currentTimeMillis();
 			Time t = new Time("GMT+8");
-			t.setToNow(); // È¡µÃÌåÏµÊ±ºò
+			t.setToNow(); // å–å¾—ä½“ç³»æ—¶å€™
 			int date = t.year * 10000 + t.month * 100 + t.monthDay;
 			int time = t.hour * 10000 + t.minute * 100 + t.second;
 			String fileName = "crash-" + date + "-" + time
@@ -207,9 +207,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	}
 
 	/**
-	 * ÊÕ¼¯·¨¶ÈÀ£É¢µÄÉè±¸ĞÅÏ¢
+	 * æ”¶é›†æ³•åº¦æºƒæ•£çš„è®¾å¤‡ä¿¡æ¯
 	 * 
-	 * £Àparam ctx
+	 * ï¼ param ctx
 	 */
 	public void collectCrashDeviceInfo(Context ctx) {
 		try {
@@ -224,9 +224,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		} catch (NameNotFoundException e) {
 			Log.e(TAG, "Error while collect package info", e);
 		}
-		// Ó¦ÓÃ·´ÉäÀ´ÊÕ¼¯Éè±¸ĞÅÏ¢.ÔÚBuildÀàÖĞ°üº¬¸÷ÀàÉè±¸ĞÅÏ¢,
-		// ÀıÈç: ÌåÏµ°æ±¾ºÅ,Éè±¸ÁÙÅèÉÌ µÈ°ïÖúµ÷ÊÔ·¨¶ÈµÄÓĞĞ§ĞÅÏ¢
-		// ¾ßÌåĞÅÏ¢Çë²Î¿¼ºóÃæµÄ½ØÍ¼
+		// åº”ç”¨åå°„æ¥æ”¶é›†è®¾å¤‡ä¿¡æ¯.åœ¨Buildç±»ä¸­åŒ…å«å„ç±»è®¾å¤‡ä¿¡æ¯,
+		// ä¾‹å¦‚: ä½“ç³»ç‰ˆæœ¬å·,è®¾å¤‡ä¸´ç›†å•† ç­‰å¸®åŠ©è°ƒè¯•æ³•åº¦çš„æœ‰æ•ˆä¿¡æ¯
+		// å…·ä½“ä¿¡æ¯è¯·å‚è€ƒåé¢çš„æˆªå›¾
 		Field[] fields = Build.class.getDeclaredFields();
 		for (Field field : fields) {
 			try {

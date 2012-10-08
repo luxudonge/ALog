@@ -4,7 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 
-public class LogToScreen {
+class LogToScreen {
 
 	private static LogToScreen instance;
 	private NotificationManager mNotificationManager;

@@ -7,14 +7,14 @@ import android.util.Log;
 
 /**
  * 
- * ÈÕÖ¾Êä³ö
+ * æ—¥å¿—è¾“å‡º
  * 
- * 1.ÉèÖÃÊÇ·ñÊä³öÈÕÖ¾
- * 2.ÒÔÊ²Ã´·½Ê½Êä³ö£¨¿ØÖÆÌ¨£¬µ½ÎÄ¼ş£¬´ÓlogcatÀï×¥È¡£©
- * 3.ÉèÖÃÊä³öÈÕÖ¾µÄÄ¿Â¼
- * 4.Òì³£²¶»ñ¹¦ÄÜ£¨Ö»ÄÜ²¶»ñ²¿·ÖÒì³££©
+ * 1.è®¾ç½®æ˜¯å¦è¾“å‡ºæ—¥å¿—
+ * 2.ä»¥ä»€ä¹ˆæ–¹å¼è¾“å‡ºï¼ˆæ§åˆ¶å°ï¼Œåˆ°æ–‡ä»¶ï¼Œä»logcaté‡ŒæŠ“å–ï¼‰
+ * 3.è®¾ç½®è¾“å‡ºæ—¥å¿—çš„ç›®å½•
+ * 4.å¼‚å¸¸æ•è·åŠŸèƒ½ï¼ˆåªèƒ½æ•è·éƒ¨åˆ†å¼‚å¸¸ï¼‰
  * 
- * Ä¬ÈÏsdcardµÄÂ·¾¶Îª/sdcard/alog/
+ * é»˜è®¤sdcardçš„è·¯å¾„ä¸º/sdcard/alog/
  * 
  * @author Alex.Lu
  * 
@@ -43,10 +43,10 @@ public class ALog {
 	}
 	
 	/**
-	 * ³õÊ¼»¯ÈÕÖ¾
-	 * Ä¬ÈÏÎª/sdcard/alog/
+	 * åˆå§‹åŒ–æ—¥å¿—
+	 * é»˜è®¤ä¸º/sdcard/alog/
 	 * 
-	 * @param path ÈÕÖ¾´æ·ÅµÄÄ¿Â¼
+	 * @param path æ—¥å¿—å­˜æ”¾çš„ç›®å½•
 	 */
 	public static void init(Context context,String path){
 		mContext = context;
@@ -60,7 +60,7 @@ public class ALog {
 	}
 	
 	/**
-	 * Æô¶¯Òì³£²¶»ñ¹¦ÄÜ
+	 * å¯åŠ¨å¼‚å¸¸æ•è·åŠŸèƒ½
 	 * @param context
 	 */
 	public static void tryCatchStart(Context context){
@@ -69,7 +69,7 @@ public class ALog {
 	}
 	
 	/**
-	 * ÊÇ·ñÊä³öÈÕÖ¾
+	 * æ˜¯å¦è¾“å‡ºæ—¥å¿—
 	 * @param debug
 	 */
 	public static void setDebug(boolean debug){
@@ -78,7 +78,7 @@ public class ALog {
 	
 	/**
 	 * 
-	 * Êä³öµÄÄ¿±ê
+	 * è¾“å‡ºçš„ç›®æ ‡
 	 * @param flag TO_CONSOLE/TO_FILE/TO_FROM_LOGCAT
 	 * 
 	 */
@@ -132,7 +132,7 @@ public class ALog {
 	}
 	
 	/**
-	 * »ñÈ¡ÈÕÖ¾±êÇ©
+	 * è·å–æ—¥å¿—æ ‡ç­¾
 	 * @return
 	 */
     private ALogTag getLogTag()  

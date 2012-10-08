@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 /**
  * 
- * 日志标签
- * mTag : 标签名字
- * mInfo : 线程/行数/方法
+ * 鏃ュ織鏍囩
+ * mTag : 鏍囩鍚嶅瓧
+ * mInfo : 绾跨▼/琛屾暟/鏂规硶
  * @author Alex.Lu
  *
  */
