@@ -21,7 +21,7 @@ import android.util.Log;
  */
 public class ALog {
 	
-	static String LOG_PATH = "/sdcard/alog/"; 
+	private static String LOG_PATH = "/sdcard/alog/"; 
 	
 	public static final int TO_CONSOLE = 0x1;
 	public static final int TO_FILE = 0x10;
@@ -40,6 +40,29 @@ public class ALog {
 			mLog = new ALog();
 		}
 		return mLog;
+	}
+	
+	/**
+	 * 
+	 * 获取日志路径
+	 * 
+	 * @return
+	 */
+	public static String getLogPath(){
+		return LOG_PATH;
+	}
+	
+	/**
+	 * 初始化日志
+	 * @param context
+	 */
+	public static void init(Context context){
+		mContext = context;
+		LOG_PATH = "/sdcard/alog/";
+		File destDir = new File(LOG_PATH);
+		if (!destDir.exists()) {
+		   destDir.mkdirs();
+		}
 	}
 	
 	/**

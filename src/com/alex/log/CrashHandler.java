@@ -66,7 +66,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		mContext = ctx;
 		mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 		Thread.setDefaultUncaughtExceptionHandler(this);
-		DIR = ALog.LOG_PATH;
+		DIR = ALog.getLogPath();
 	}
 
 	/**

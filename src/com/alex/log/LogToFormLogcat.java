@@ -84,7 +84,7 @@ class LogToFormLogcat {
 	private void openLogFileOutStream() {
 		if (mLogStream == null) {
 			try {
-				File file = new File(ALog.LOG_PATH,LOG_TEMP_FILE);
+				File file = new File(ALog.getLogPath(),LOG_TEMP_FILE);
 				//File file = new File(mContext.getCacheDir(),LOG_TEMP_FILE);
 				if (file.exists()) {
 					mLogStream = new FileOutputStream(file, true);
@@ -124,8 +124,8 @@ class LogToFormLogcat {
 		
 		synchronized (mLock) {
 			
-			File file = new File(ALog.LOG_PATH,LOG_TEMP_FILE);
-			File destFile = new File(ALog.LOG_PATH,LOG_LAST_FILE);
+			File file = new File(ALog.getLogPath(),LOG_TEMP_FILE);
+			File destFile = new File(ALog.getLogPath(),LOG_LAST_FILE);
 			if (destFile.exists()) {
 				destFile.delete();
 			}
