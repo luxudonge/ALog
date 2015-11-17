@@ -23,6 +23,8 @@ public class ALog {
 	
 	private static String LOG_PATH = "/sdcard/alog/"; 
 	
+	public static final int JSON_FORMAT = 0x01;
+	
 	public static final int TO_CONSOLE = 0x1;
 	public static final int TO_FILE = 0x10;
 	public static final int TO_FROM_LOGCAT = 0x100;
@@ -130,6 +132,11 @@ public class ALog {
 	}
 	
 	
+	public static void json(String msg){
+		getInstance().log(msg,JSON_FORMAT);
+	}
+	
+	
 	private void log(String msg,int level){
 		if(!DEBUG){
 			return ;
@@ -141,7 +148,7 @@ public class ALog {
 		msgBuf.append( logTag.mInfo);
 		msgBuf.append(msg);
 		if((TO_DEST & TO_CONSOLE) != 0){
-			LogToConsole.getInstance().logTo(tag, msgBuf.toString(), level);
+			LogToConsole.getInstance().logTo(tag, logTag.mInfo,msg, level);
 		}
 		if((TO_DEST & TO_FILE) != 0){
 			LogToFile.getInstance().logTo(tag, msgBuf.toString(), level);

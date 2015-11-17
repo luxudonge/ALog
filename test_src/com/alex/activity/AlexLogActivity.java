@@ -67,7 +67,7 @@ public class AlexLogActivity extends Activity implements OnClickListener{
 		ALog.i("ALog.i");
 		ALog.v("ALog.v");
 		ALog.w("ALog.w");
-		
+		ALog.json("{ff:1;pp:[{i:1,jj:null}]''==}}}");
 		
 		Button bu = (Button)findViewById(R.id.btn);
 		bu.setOnClickListener(this);
